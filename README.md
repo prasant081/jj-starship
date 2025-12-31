@@ -77,20 +77,15 @@ Add to `~/.config/starship.toml`:
 ```toml
 [custom.jj]
 command = "jj-starship"
-detect_folders = [".jj", ".git"]
+when = "jj-starship detect"
 shell = ["sh"]
 format = "$output "
 ```
 
 **Why these settings:**
-- `detect_folders` - Starship checks directory existence natively (no process spawn), only runs command in repos
+- `when = "jj-starship detect"` - Walks up directory tree to find `.jj` or `.git`, works from any subdirectory
 - `shell = ["sh"]` - Uses minimal POSIX shell, bypasses user's shell rc files (~100ms faster)
 - `format = "$output "` - Passes through jj-starship's ANSI colors directly
-
-For JJ repos only (keep native git modules for pure git repos):
-```toml
-detect_folders = [".jj"]
-```
 
 To hide built-in modules when in a JJ repo:
 
@@ -226,7 +221,7 @@ symbol = ""
 style = "bg:color_aqua"
 format = '[[ $symbol $output ](fg:color_fg0 bg:color_aqua)]($style)'
 command = "jj-starship --no-color --no-symbol --no-jj-prefix --no-git-prefix"
-detect_folders = [".jj", ".git"]
+when = "jj-starship detect"
 shell = ["sh"]
 ```
 
