@@ -76,15 +76,14 @@ Add to `~/.config/starship.toml`:
 
 ```toml
 [custom.jj]
-command = "jj-starship"
 when = "jj-starship detect"
-shell = ["sh"]
+shell = ["jj-starship"]
 format = "$output "
 ```
 
 **Why these settings:**
 - `when = "jj-starship detect"` - Walks up directory tree to find `.jj` or `.git`, works from any subdirectory
-- `shell = ["sh"]` - Uses minimal POSIX shell, bypasses user's shell rc files (~100ms faster)
+- `shell = ["jj-starship"]` - Executes jj-starship directly without shell wrapper overhead (cross-platform)
 - `format = "$output "` - Passes through jj-starship's ANSI colors directly
 
 To hide built-in modules when in a JJ repo:
@@ -217,12 +216,11 @@ disabled = true
 disabled = true
 
 [custom.jj]
-symbol = ""
+symbol = ""
 style = "bg:color_aqua"
 format = '[[ $symbol $output ](fg:color_fg0 bg:color_aqua)]($style)'
-command = "jj-starship --no-color --no-symbol --no-jj-prefix --no-git-prefix"
 when = "jj-starship detect"
-shell = ["sh"]
+shell = ["jj-starship", "--no-color", "--no-symbol", "--no-jj-prefix", "--no-git-prefix"]
 ```
 
 ## License
