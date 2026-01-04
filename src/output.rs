@@ -206,10 +206,10 @@ mod tests {
     use super::*;
     use std::borrow::Cow;
 
-    use crate::config::DisplayConfig;
     #[cfg(feature = "git")]
     use crate::config::DEFAULT_GIT_SYMBOL;
     use crate::config::DEFAULT_JJ_SYMBOL;
+    use crate::config::DisplayConfig;
 
     #[allow(dead_code)]
     fn default_config() -> Config {

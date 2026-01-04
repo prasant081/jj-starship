@@ -8,7 +8,7 @@ use jj_lib::ref_name::RefName;
 use jj_lib::repo::{Repo, StoreFactories};
 use jj_lib::settings::UserSettings;
 use jj_lib::str_util::{StringMatcher, StringPattern};
-use jj_lib::workspace::{default_working_copy_factories, Workspace};
+use jj_lib::workspace::{Workspace, default_working_copy_factories};
 use std::path::Path;
 use std::sync::Arc;
 
